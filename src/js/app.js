@@ -2,18 +2,18 @@ import json from './parser';
 import read from './reader';
 
 class GameSavingLoader {
+
   static load() {
-    return new Promise((resolve, reject) => {
       (async () => {
         try {
           const data = await read();
           const value = await json(data);
-          resolve(value);
+          return JSON.parse(value);
+
         } catch (error) {
-          reject(error);
+          throw new Error('Ошибка при загрузке');
         }
       })();
-    });
   }
 }
 
